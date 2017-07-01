@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         mDatabaseInfoDisplayTextView = (TextView) findViewById(R.id.tv_database_info_display);
 
         HabitDbHelper databaseHelper = new HabitDbHelper(this);
-        
+
         addTestHabitsToDatabase(databaseHelper);
         displayDatabaseContent(databaseHelper);
     }

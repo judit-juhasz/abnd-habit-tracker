@@ -16,7 +16,7 @@ public class HabitDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String SQL_CREATE_HABITS_TABLE = "CREATE TABLE " + HabitEntry.HABITS_TABLE_NAME + "("
+        String SQL_CREATE_HABITS_TABLE = "CREATE TABLE " + HabitEntry.TABLE_NAME + "("
                 + HabitEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + HabitEntry.COLUMN_HABIT_NAME + " TEXT NOT NULL, "
                 + HabitEntry.COLUMN_DATE_YEAR + " INTEGER NOT NULL DEFAULT 2017, "
@@ -28,7 +28,7 @@ public class HabitDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String SQL_DELETE_TABLE = "DROP TABLE IF EXISTS " + HabitEntry.HABITS_TABLE_NAME;
+        String SQL_DELETE_TABLE = "DROP TABLE IF EXISTS " + HabitEntry.TABLE_NAME;
 
         db.execSQL(SQL_DELETE_TABLE);
 
@@ -43,7 +43,7 @@ public class HabitDbHelper extends SQLiteOpenHelper {
         values.put(HabitEntry.COLUMN_DATE_DAY, dayOfDate);
 
         SQLiteDatabase database = getWritableDatabase();
-        database.insert(HabitEntry.HABITS_TABLE_NAME, null, values);
+        database.insert(HabitEntry.TABLE_NAME, null, values);
     }
 
     public Cursor readAllHabits() {
@@ -58,6 +58,6 @@ public class HabitDbHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase database = getReadableDatabase();
 
-        return database.query(HabitEntry.HABITS_TABLE_NAME, projection, null, null, null, null, null);
+        return database.query(HabitEntry.TABLE_NAME, projection, null, null, null, null, null);
     }
 }

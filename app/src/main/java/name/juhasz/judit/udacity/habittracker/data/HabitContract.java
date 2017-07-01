@@ -8,7 +8,7 @@ public final class HabitContract {
 
     public final static class HabitEntry implements BaseColumns {
 
-        public final static String HABITS_TABLE_NAME ="habits";
+        public final static String TABLE_NAME ="habits";
 
         public final static String COLUMN_HABIT_NAME = "habit";
         public final static String COLUMN_DATE_YEAR = "year";
