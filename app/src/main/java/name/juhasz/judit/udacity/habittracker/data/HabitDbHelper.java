@@ -1,5 +1,6 @@
 package name.juhasz.judit.udacity.habittracker.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -31,5 +32,16 @@ public class HabitDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_TABLE);
 
         onCreate(db);
+    }
+
+    public void insertHabit(String habitName, int yearOfDate, String monthOfDate, int dayOfDate) {
+        ContentValues values = new ContentValues();
+        values.put(HabitEntry.COLUMN_HABIT_NAME, habitName);
+        values.put(HabitEntry.COLUMN_DATE_YEAR, yearOfDate);
+        values.put(HabitEntry.COLUMN_DATE_MONTH, monthOfDate);
+        values.put(HabitEntry.COLUMN_DATE_DAY, dayOfDate);
+
+        SQLiteDatabase database = getWritableDatabase();
+        database.insert(HabitEntry.HABITS_TABLE_NAME, null, values);
     }
 }
