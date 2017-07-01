@@ -2,6 +2,7 @@ package name.juhasz.judit.udacity.habittracker.data;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import name.juhasz.judit.udacity.habittracker.data.HabitContract.HabitEntry;
@@ -11,7 +12,7 @@ public class HabitDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "habits.db";
     private static final int DATABASE_VERSION = 1;
 
-    HabitDbHelper(Context context) { super(context, DATABASE_NAME, null, DATABASE_VERSION); }
+    public HabitDbHelper(Context context) { super(context, DATABASE_NAME, null, DATABASE_VERSION); }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -43,5 +44,20 @@ public class HabitDbHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase database = getWritableDatabase();
         database.insert(HabitEntry.HABITS_TABLE_NAME, null, values);
+    }
+
+    public Cursor readAllHabits() {
+
+        String[] projection = {
+                HabitEntry._ID,
+                HabitEntry.COLUMN_HABIT_NAME,
+                HabitEntry.COLUMN_DATE_YEAR,
+                HabitEntry.COLUMN_DATE_MONTH,
+                HabitEntry.COLUMN_DATE_DAY
+        };
+
+        SQLiteDatabase database = getReadableDatabase();
+
+        return database.query(HabitEntry.HABITS_TABLE_NAME, projection, null, null, null, null, null);
     }
 }
